@@ -9,10 +9,14 @@ Simple program that makes the input rainbow
 
 # Usage
 ```bash
-echo "Hello World" | raingow <flags>
+echo "Hello World" | raingow (-c)
+
+raingow -i "Hello World" (-c)
 ```
 ### Flags:
 `-c` - Clears the terminal before printing the text (tested on Windows)
+
+`-i` - Input string
 
 # Building
 1. Make sure you have [Go](https://go.dev/dl/) installed
