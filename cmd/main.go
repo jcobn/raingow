@@ -10,20 +10,27 @@ import (
 
 func main() {
 	flag.Parse()
+	info, _ := os.Stdin.Stat()
+	input := ""
+
+	if info.Mode()&os.ModeCharDevice != 0 {
+		if len(*flInput) > 0 {
+			input = *flInput
+		} else {
+			utils.SendUsageMessage()
+			return
+		}
+	} else {
+		bytes, _ := ioutil.ReadAll(os.Stdin)
+		input += string(bytes)
+	}
 	if *flClearTerminal {
 		utils.ClearTerminal()
 	}
-	info, _ := os.Stdin.Stat()
-
-	if info.Mode()&os.ModeCharDevice != 0 {
-		utils.SendUsageMessage()
-		return
-	}
-	bytes, _ := ioutil.ReadAll(os.Stdin)
-	input := string(bytes)
 	utils.PrintRgbText(input)
 }
 
 var (
 	flClearTerminal = flag.Bool("c", false, "Clears the terminal when printing text")
+	flInput         = flag.String("i", "", "Input string")
 )

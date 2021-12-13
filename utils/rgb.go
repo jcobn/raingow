@@ -18,5 +18,4 @@ func PrintRgbText(text string) {
 		r, g, b := RGB(j)
 		fmt.Printf("\033[38;2;%d;%d;%dm%c\033[0m", r, g, b, rArr[j])
 	}
-	fmt.Println()
 }
